@@ -1,7 +1,7 @@
 # AOC 2020 Day 1, part 1
 print("AOC 2020 Dec 01 #1:")
 lines = []
-with open("input/input01.txt") as file:
+with open("2020/input/input01.txt") as file:
     for line in file:
         line = line.strip()
         lines.append(line)

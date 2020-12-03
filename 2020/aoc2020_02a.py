@@ -23,8 +23,8 @@ def validateLine(line : str):
 
 lines = []
 validCount = 0
-with open("input/input02.txt") as file:
+with open("2020/input/input02.txt") as file:
     for line in file:
         if validateLine(line):
             validCount+=1
-print("Valid password count: " + str(validCount))
+print("Valid password count: ", validCount)
