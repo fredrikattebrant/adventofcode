@@ -19,23 +19,12 @@ def validateLine(line : str):
     lowValid = charCount >= rangeFrom
     highValid = charCount <= rangeTo
     valid = lowValid and highValid
-    #print("Range low:  " + str(rangeFrom))
-    #print("Range high: " + str(rangeTo))
-    #print("Char: " + char)
-    #print("Password:  " + password)
-    #print("Char count: " + str(charCount))
-    #print("Is valid: " + str(valid))
     return valid
 
 lines = []
 validCount = 0
 with open("input/input02.txt") as file:
     for line in file:
-        #print("Input: " + line + " => " + validateLine(line))
         if validateLine(line):
             validCount+=1
 print("Valid password count: " + str(validCount))
-
- 
-#print("Count test:" + str("aaa".count('a')))
- # The end
