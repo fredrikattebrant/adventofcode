@@ -6,7 +6,15 @@ import se.attebrant.common.AbstractAdvent;
 
 public class Advent0501 extends AbstractAdvent {
 
+  public Advent0501(boolean... debug) {
+    super("2017", debug);
+  }
+
   public static void main(String[] args) {
+    new Advent0501(false).solve();
+  }
+
+  private void solve() {
     List<String> instructions = readData3("Advent0501FA.txt");
 
     List<Integer> jumps = getJumps(instructions);
@@ -19,7 +27,7 @@ public class Advent0501 extends AbstractAdvent {
     processJumps(jumps);
   }
 
-  private static void processJumps(List<Integer> jumps) {
+  private void processJumps(List<Integer> jumps) {
     int current = 0;
     int steps = 0;
     while (true) {
@@ -38,7 +46,7 @@ public class Advent0501 extends AbstractAdvent {
     System.out.println("Done after " + steps + " step.");
   }
 
-  private static List<Integer> getJumps(List<String> instructions) {
+  private List<Integer> getJumps(List<String> instructions) {
     List<Integer> jumps = new ArrayList<>();
     for (String instruction : instructions) {
       jumps.add(Integer.parseInt(instruction));

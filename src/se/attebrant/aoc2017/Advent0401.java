@@ -8,7 +8,15 @@ import se.attebrant.common.AbstractAdvent;
 
 public class Advent0401 extends AbstractAdvent {
 
+  public Advent0401(boolean... debug) {
+    super("2017", debug);
+  }
+
   public static void main(String[] args) {
+    new Advent0401(true).solve();
+  }
+
+  private void solve() {
     List<List<String>> data = readData2(
         "/Users/fredrik/git/adventofcode/src/se/attebrant/aoc2017/Advent0401FA.txt");
     // "/Users/fredrik/dev/workspaces/adventofcode/adventofcode2017/src/adventofcode2017/Advent0401.txt");

@@ -22,7 +22,16 @@ import se.attebrant.common.AbstractAdvent;
  */
 public class Advent0201 extends AbstractAdvent {
 
+  public Advent0201(boolean... debug) {
+    super("2017", debug);
+  }
+
   public static void main(String[] args) {
+    Advent0201 advent0201 = new Advent0201(true);
+    advent0201.solve();
+  }
+
+  private void solve() {
     List<List<String>> data = readData2(
         "/Users/fredrik/git/adventofcode/src/se/attebrant/aoc2017/Advent0201.txt");
     // data.forEach(row -> row.stream().forEach(System.out::println));
@@ -30,11 +39,11 @@ public class Advent0201 extends AbstractAdvent {
     List<Integer> input1 = Arrays.asList(5, 1, 9, 5);
     List<Integer> input2 = Arrays.asList(7, 5, 3);
     List<Integer> input3 = Arrays.asList(2, 4, 6, 8);
-    test2(Advent0201::rowMaxMinDiff, input1, 8);
-    test2(Advent0201::rowMaxMinDiff, input2, 4);
-    test2(Advent0201::rowMaxMinDiff, input3, 6);
+    test2(this::rowMaxMinDiff, input1, 8);
+    test2(this::rowMaxMinDiff, input2, 4);
+    test2(this::rowMaxMinDiff, input3, 6);
 
-    System.out.print("My answer: ");
+    log("My answer: ");
     Integer totalDelta = 0;
     for (List<String> row : data) {
       String rowData = row.get(0);
@@ -45,23 +54,23 @@ public class Advent0201 extends AbstractAdvent {
               .map(Integer::parseInt)
               .collect(Collectors.toList()));
       totalDelta = totalDelta + delta;
-      // System.out.println("Delta: " + delta + " : " + totalDelta);
+      // log("Delta: " + delta + " : " + totalDelta);
     }
-    System.out.println(totalDelta);
+    log(totalDelta);
   }
 
-  private static void test2(Function<List<Integer>, Integer> fun, List<Integer> input1,
+  private void test2(Function<List<Integer>, Integer> fun, List<Integer> input1,
       int expected) {
     int sum = fun.apply(input1);
     if (sum == expected) {
-      System.out.println("+++ " + input1 + " => " + expected);
+      log("+++ " + input1 + " => " + expected);
     } else {
-      System.out.println("--- " + input1 + " => " + expected);
+      log("--- " + input1 + " => " + expected);
     }
 
   }
 
-  public static Integer rowMaxMinDiff(List<Integer> numbers) {
+  public Integer rowMaxMinDiff(List<Integer> numbers) {
     Integer min = Integer.MAX_VALUE;
     Integer max = 0;
     for (Integer num : numbers) {
@@ -72,7 +81,7 @@ public class Advent0201 extends AbstractAdvent {
         max = num;
       }
     }
-    // System.out.println("Min: " + min + ", max: " + max);
+    // log("Min: " + min + ", max: " + max);
     return max - min;
   }
 

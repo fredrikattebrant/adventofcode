@@ -22,7 +22,16 @@ import se.attebrant.common.AbstractAdvent;
  */
 public class Advent0202 extends AbstractAdvent {
 
+  public Advent0202(boolean... debug) {
+    super("2017", debug);
+  }
+
   public static void main(String[] args) {
+    Advent0202 advent0202 = new Advent0202(true);
+    advent0202.solve();
+  }
+
+  private void solve() {
     List<List<String>> data = readData2(
         "/Users/fredrik/git/adventofcode/src/se/attebrant/aoc2017/Advent0201.txt");
     // "/Users/fredrik/dev/workspaces/adventofcode/adventofcode2017/src/adventofcode2017/Advent0201.txt");
@@ -31,9 +40,9 @@ public class Advent0202 extends AbstractAdvent {
     List<Integer> input1 = Arrays.asList(5, 9, 2, 8);
     List<Integer> input2 = Arrays.asList(9,4,7,3);
     List<Integer> input3 = Arrays.asList(3,8,6,5);
-    test2(Advent0202::rowDivideEven, input1, 4);
-    test2(Advent0202::rowDivideEven, input2, 3);
-    test2(Advent0202::rowDivideEven, input3, 2);
+    test2(this::rowDivideEven, input1, 4);
+    test2(this::rowDivideEven, input2, 3);
+    test2(this::rowDivideEven, input3, 2);
 
     System.out.print("My answer: ");
     Integer totalDelta = 0;
@@ -51,22 +60,22 @@ public class Advent0202 extends AbstractAdvent {
     System.out.println(totalDelta);
   }
 
-  private static void test2(Function<List<Integer>, Integer> fun, List<Integer> input1,
+  private void test2(Function<List<Integer>, Integer> fun, List<Integer> input1,
       int expected) {
     int sum = fun.apply(input1);
     if (sum == expected) {
-      System.out.println("+++ " + input1 + " => " + expected);
+      log("+++ " + input1 + " => " + expected);
     } else {
-      System.out.println("--- " + input1 + " => " + expected);
+      log("--- " + input1 + " => " + expected);
     }
 
   }
 
-  public static Integer rowDivideEven(List<Integer> numbers) {
+  public Integer rowDivideEven(List<Integer> numbers) {
     List<Integer> sorted =
         numbers.stream()
             .sorted((i1, i2) -> Integer.compare(i2, i1))
-            .collect(Collectors.toList());
+            .toList();
     for (int yx = 0; yx < sorted.size() - 1; yx++) {
       Integer first = sorted.get(yx);
       for (int ix = yx+1; ix < sorted.size(); ix++) {
@@ -77,7 +86,7 @@ public class Advent0202 extends AbstractAdvent {
       }
     }    
     // none found - what to do???
-    System.out.println("*** No match found in: " + numbers);
+    log("*** No match found in: " + numbers);
     return 0;
   
   }

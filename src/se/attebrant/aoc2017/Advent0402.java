@@ -9,8 +9,15 @@ import se.attebrant.common.AbstractAdvent;
 
 public class Advent0402 extends AbstractAdvent {
 
-  public static void main(String[] args) {
+  public Advent0402(boolean... debug) {
+    super("2017", debug);
+  }
 
+  public static void main(String[] args) {
+    new Advent0402(false).solve();
+  }
+
+  private void solve() {
     List<List<String>> data = readData2(
         "/Users/fredrik/git/adventofcode/src/se/attebrant/aoc2017/Advent0401FA.txt");
     // "/Users/fredrik/dev/workspaces/adventofcode/adventofcode2017/src/adventofcode2017/Advent0401.txt");
@@ -37,9 +44,9 @@ public class Advent0402 extends AbstractAdvent {
         startIx++;
       }
       if (foundMatch) {
-        System.out.println("*** " + wordsData);
+        log("*** " + wordsData);
       } else {
-        System.out.println("+++ " + wordsData);
+        log("+++ " + wordsData);
         validCount++;
       }
     }
@@ -49,8 +56,8 @@ public class Advent0402 extends AbstractAdvent {
 
   }
 
-  private static boolean containsSameChars(String w1, String w2) {
-    // System.out.println("Matching: " + w1 + " with: " + w2);
+  private boolean containsSameChars(String w1, String w2) {
+    // log("Matching: " + w1 + " with: " + w2);
     if (w1 == null || w2 == null) {
       return false;
     }
@@ -66,13 +73,13 @@ public class Advent0402 extends AbstractAdvent {
     }
     // return w2Chars.isEmpty();
     if (w2Chars.isEmpty()) {
-      System.out.println(w1 + " matches " + w2);
+      log(w1 + " matches " + w2);
       return true;
     } ;
     return false;
   }
 
-  private static List<Character> stringToList(String s) {
+  private List<Character> stringToList(String s) {
     return s.chars()
         .mapToObj(e -> (char) e)
         .collect(Collectors.toList());
@@ -87,7 +94,7 @@ public class Advent0402 extends AbstractAdvent {
   oiii ioii iioi iiio is not valid - any of these words can be rearranged to form any other word.
    * </pre>
    */
-  private static List<List<String>> getTestData() {
+  private List<List<String>> getTestData() {
     List<List<String>> data = new ArrayList<>();
     data.add(Arrays.asList("abcde fghij"));
     data.add(Arrays.asList("abcde xyz ecdab"));
