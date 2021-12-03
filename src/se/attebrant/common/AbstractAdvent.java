@@ -35,6 +35,13 @@ public abstract class AbstractAdvent {
     this.debug = debug.length > 0 && debug[0];
   }
 
+  /**
+   * Print text but keep sonar happy in regular code ;-)
+   */
+  protected static void print(String text) {
+    System.out.println(text);
+  }
+
   public void test(Function<String, Integer> fun, String digits, Integer expected) {
     Integer theSum = fun.apply(digits);
     if (theSum.equals(expected) || expected == -1) {

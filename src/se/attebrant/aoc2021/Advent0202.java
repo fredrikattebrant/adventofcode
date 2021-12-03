@@ -23,18 +23,13 @@ public class Advent0202 extends AbstractAdvent {
       log(tokens[0] + " " + tokens[1]);
       int delta = Integer.parseInt(tokens[1]);
       switch (tokens[0]) {
-        case "down":
-          aim += delta;
-          break;
-        case "up":
-          aim -= delta;
-          break;
-        case "forward":
+        case "down" -> aim += delta;
+        case "up" -> aim -= delta;
+        case "forward" -> {
           horizontalPosition += delta;
           depth += aim * delta;
-          break;
-        default:
-          throw new IllegalArgumentException("Unexpected value: " + tokens[0]);
+        }
+        default -> throw new IllegalArgumentException("Unexpected value: " + tokens[0]);
       }
       log("HP: " + horizontalPosition + ", D: " + depth + ", A: " + aim);
     }

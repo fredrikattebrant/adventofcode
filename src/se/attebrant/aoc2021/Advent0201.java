@@ -21,20 +21,19 @@ public class Advent0201 extends AbstractAdvent {
       String[] tokens = line.split(" ");
       log("Token => " + tokens[0]);
       switch (tokens[0]) {
-        case "down":
+        case "down" -> {
           log(tokens[0]);
           depth += Integer.parseInt(tokens[1]);
-          break;
-        case "up":
+        }
+        case "up" -> {
           log(tokens[0]);
           depth -= Integer.parseInt(tokens[1]);
-          break;
-        case "forward":
+        }
+        case "forward" -> {
           log(tokens[0]);
           horizontalPosition += Integer.parseInt(tokens[1]);
-          break;
-        default:
-          throw new IllegalArgumentException("Unexpected value: " + tokens[0]);
+        }
+        default -> throw new IllegalArgumentException("Unexpected value: " + tokens[0]);
       }
       log("HP: " + horizontalPosition + ", D: " + depth);
     }
