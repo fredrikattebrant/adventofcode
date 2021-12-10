@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.ListIterator;
 import se.attebrant.common.AbstractAdvent;
 
-public class Advent0301 extends AbstractAdvent {
+public class Advent03 extends AbstractAdvent {
 
-  public Advent0301(boolean... debug) {
+  public Advent03(boolean... debug) {
     super("2021", debug);
   }
 
   public static void main(String[] args) {
-    Advent0301 advent = new Advent0301(true);
+    Advent03 advent = new Advent03(true);
     print("Day 03, part 1: " + advent.solvePart1());
     print("Day 03, part 2: " + advent.solvePart2());
   }
