@@ -14,7 +14,7 @@ public class Advent09 extends AbstractAdvent {
     Advent09 advent = new Advent09(false);
     boolean useTestInput = false;
     print("Day 09, part 1: " + advent.solvePart1(useTestInput));
-    // print("Day 06, part 2: " + advent.solvePart2(useTestInput));
+    // print("Day 09, part 2: " + advent.solvePart2(useTestInput));
   }
 
   private List<String> puzzleInput = readData3("Advent09.txt");
