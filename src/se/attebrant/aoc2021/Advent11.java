@@ -27,26 +27,16 @@ public class Advent11 extends AbstractAdvent {
     return solve(useTestInput, false);
   }
 
-  class Grid {
+  class CaveGrid extends Grid {
 
-    int[][] grid;
-    int rows;
-    int cols;
     boolean[][] flashed;
     int flashCount = 0;
 
-    public Grid(List<String> input) {
-      rows = input.size();
-      cols = input.get(0).length();
-      grid = new int[rows][cols];
+    public CaveGrid(List<String> input) {
+      super(input);
       flashed = new boolean[rows][cols];
       for (int r = 0; r < rows; r++) {
-        String row = input.get(r).trim();
-        if (row.isBlank()) {
-          continue;
-        }
         for (int c = 0; c < cols; c++) {
-          grid[r][c] = Integer.parseInt(row.charAt(c) + "");
           flashed[r][c] = false;
         }
       }
@@ -56,7 +46,7 @@ public class Advent11 extends AbstractAdvent {
       // Increase energy level in all cells by 1
       for (int r = 0; r < rows; r++) {
         for (int c = 0; c < cols; c++) {
-          grid[r][c] += 1;
+          theGrid[r][c] += 1;
         }
       }
       // Flash if energy > 9
@@ -74,7 +64,7 @@ public class Advent11 extends AbstractAdvent {
         for (int c = 0; c < cols; c++) {
           if (flashed[r][c]) {
             flashed[r][c] = false;
-            grid[r][c] = 0;
+            theGrid[r][c] = 0;
           }
         }
       }
@@ -87,7 +77,7 @@ public class Advent11 extends AbstractAdvent {
       for (int r = 0; r < rows; r++) {
         for (int c = 0; c < cols; c++) {
           if (!flashed[r][c]) {
-            int energyLevel = grid[r][c];
+            int energyLevel = theGrid[r][c];
             if (energyLevel > 9) {
               // Flash, if not already flashed
               flashed[r][c] = true;
@@ -105,7 +95,7 @@ public class Advent11 extends AbstractAdvent {
       for (int r = row - 1; r <= row + 1; r++) {
         for (int c = col - 1; c <= col + 1; c++) {
           if (r >= 0 && r < rows && c >= 0 && c < cols) {
-            grid[r][c] += 1;
+            theGrid[r][c] += 1;
           }
         }
       }
@@ -127,7 +117,7 @@ public class Advent11 extends AbstractAdvent {
       StringBuilder text = new StringBuilder();
       for (int r = 0; r < rows; r++) {
         for (int c = 0; c < cols; c++) {
-          int energyLevel = grid[r][c];
+          int energyLevel = theGrid[r][c];
           String eLvl = switch (energyLevel) {
             case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 -> energyLevel + "";
             case 10 -> "a";
@@ -159,11 +149,11 @@ public class Advent11 extends AbstractAdvent {
 
   private int solve(boolean useTestInput, boolean isPart1) {
     var input = useTestInput ? testInput : puzzleInput;
-    Grid grid = new Grid(input);
+    CaveGrid grid = new CaveGrid(input);
     return isPart1 ? solve1(grid) : solve2(grid);
   }
 
-  private int solve1(Grid grid) {
+  private int solve1(CaveGrid grid) {
     log(grid);
     for (int step = 1; step <= 100; step++) {
       grid.step(step, false);
@@ -171,7 +161,7 @@ public class Advent11 extends AbstractAdvent {
     return grid.getFlashCount();
   }
 
-  private int solve2(Grid grid) {
+  private int solve2(CaveGrid grid) {
     log(grid);
     for (int step = 1; step <= 20000; step++) {
       if (grid.step(step, true)) {
