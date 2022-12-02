@@ -26,7 +26,7 @@ public abstract class AbstractAdvent {
 
   /**
    * Constructor with parameters:
-   * 
+   *
    * @param year set the year to read data from correct folder.
    * @param debug flip debug logging on/off
    */
@@ -40,6 +40,10 @@ public abstract class AbstractAdvent {
    */
   protected static void print(String text) {
     System.out.println(text);
+  }
+
+  protected static String getDayPart(Object object) {
+    return object.getClass().getSimpleName().replace("Advent", "");
   }
 
   public void test(Function<String, Integer> fun, String digits, Integer expected) {
@@ -98,7 +102,7 @@ public abstract class AbstractAdvent {
 
   /**
    * Print the message to the console.
-   * 
+   *
    * @param message
    */
   public void log(Object message) {
