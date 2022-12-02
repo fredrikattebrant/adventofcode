@@ -23,6 +23,10 @@ class Grid {
     }
   }
 
+  public Integer get(int r, int c) {
+    return theGrid[r][c];
+  }
+
   @Override
   public String toString() {
     StringBuilder text = new StringBuilder();
