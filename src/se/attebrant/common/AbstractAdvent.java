@@ -19,6 +19,8 @@ public abstract class AbstractAdvent {
       "/Users/fredrik/git/adventofcode/src/se/attebrant/";
 
   private boolean debug = false;
+  protected static boolean IS_TEST = true;
+  protected static boolean IS_LIVE = false;
 
   protected AbstractAdvent() {
     baseDir += "aoc2017/";
