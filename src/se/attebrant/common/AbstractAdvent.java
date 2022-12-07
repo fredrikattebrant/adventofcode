@@ -98,6 +98,11 @@ public abstract class AbstractAdvent {
     return data;
   }
 
+  protected List<String> readData4(boolean isTest) {
+    String name = this.getClass().getSimpleName() + (isTest ? "test" : "") + ".txt";
+    return readData3(name);
+  }
+
   private List<String> convertLineTolist(String line) {
     return Arrays.asList(line.split("\t"));
   }
