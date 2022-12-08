@@ -103,6 +103,10 @@ public abstract class AbstractAdvent {
     return readData3(name);
   }
 
+  protected String getInputFileName(boolean isTest) {
+    return baseDir + this.getClass().getSimpleName() + (isTest ? "test" : "") + ".txt";
+  }
+
   private List<String> convertLineTolist(String line) {
     return Arrays.asList(line.split("\t"));
   }
