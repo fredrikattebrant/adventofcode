@@ -122,4 +122,10 @@ public abstract class AbstractAdvent {
     }
   }
 
+  public void logf(String format, String... message) {
+    if (debug) {
+      System.out.println(String.format(format, message));
+    }
+  }
+
 }
