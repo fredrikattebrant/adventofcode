@@ -131,3 +131,4 @@ dmypy.json
 
 /bin/
 /tmp/
+/.DS_Store
