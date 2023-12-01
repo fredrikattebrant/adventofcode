@@ -1,5 +1,6 @@
 package se.attebrant.aoc2023;
 
+import java.io.IOException;
 import java.util.List;
 
 import se.attebrant.common.AbstractAdvent;
@@ -22,19 +23,19 @@ public class Advent01 extends AbstractAdvent {
       "eight",
       "nine");
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     var isTest = false;
     Advent01 advent = new Advent01(isTest);
     String day = getDayPart(advent);
-    print("Result day " + day + ", part1: " + advent.solve(false, false));
-    print("Result day " + day + ", part2: " + advent.solve(true, false));
+    print("Result day " + day + ", part1: " + advent.solve(day, false, false));
+    print("Result day " + day + ", part2: " + advent.solve(day, true, false));
   }
 
-  private int solve(boolean isPart2, boolean isTest) {
+  private int solve(String day, boolean isPart2, boolean isTest) throws IOException {
     log("=====");
     log("Part" + (isPart2 ? 2 : 1));
     log("=====");
-    List<String> input = readData(isPart2, isTest);
+    List<String> input = readData(day, isPart2, isTest);
     int sum = 0;
     for (String line : input) {
       logf("");
@@ -121,15 +122,6 @@ public class Advent01 extends AbstractAdvent {
     }
     logf("+++ Last digit: %d or %d => %d", lastDigit, lastStringDigit, result);
     return result;
-  }
-
-  private List<String> readData(boolean isPart2, boolean isTest) {
-    String testSuffix = isTest ? "test" : "";
-    String testPart = isPart2 ? "2" : "1";
-    String part = isTest ? testPart : "";
-    String inputFilename = "Advent01" + testSuffix + part + ".txt";
-    return readData3(inputFilename).stream()
-        .toList();
   }
 
 }

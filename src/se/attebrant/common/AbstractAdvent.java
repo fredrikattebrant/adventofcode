@@ -3,6 +3,7 @@ package se.attebrant.common;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +30,7 @@ public abstract class AbstractAdvent {
   /**
    * Constructor with parameters:
    *
-   * @param year set the year to read data from correct folder.
+   * @param year  set the year to read data from correct folder.
    * @param debug flip debug logging on/off
    */
   protected AbstractAdvent(String year, boolean... debug) {
@@ -69,6 +70,35 @@ public abstract class AbstractAdvent {
 
     return dataMatrix;
   }
+
+  /**
+   * Returns all lines in the input file for the day (and part).<br/>
+   * Set isTest to true to read from test input file. <br/>
+   * Use isPart2 = true to read from 'test2' input file. <br/>
+   * Examples:
+   * 
+   * <pre>
+   * Advent01.txt - the real input for day 01
+   * Advent01test2.txt - test input for day, isPart2 = true, isTest = true
+   * </pre>
+   * 
+   * @param  day         the day number e.g. "02"
+   * @param  isPart2     true if second part, will be used with isTest
+   * @param  isTest      true if this is a test
+   * @return             a list of strings representing the input for the day.
+   * @throws IOException thrown when reading the input fails.
+   */
+  protected List<String> readData(String day, boolean isPart2, boolean isTest) throws IOException {
+    String testSuffix = isTest ? "test" : "";
+    String testPart = isPart2 ? "2" : "1";
+    String part = isTest ? testPart : "";
+    String inputFilename = "Advent" + day + testSuffix + part + ".txt";
+
+    Path path = Paths.get(baseDir + inputFilename);
+    return Files.readAllLines(path);
+  }
+
+
 
   public List<List<String>> readData2(String filename) {
     List<List<String>> dataMatrix = new ArrayList<>();
