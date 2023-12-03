@@ -22,6 +22,10 @@ public abstract class AbstractAdvent {
   protected boolean debug = false;
   protected static boolean IS_TEST = true;
   protected static boolean IS_LIVE = false;
+  protected static final boolean IS_PART1 = false;
+  protected static final boolean IS_PART2 = true;
+
+
 
   protected AbstractAdvent() {
     baseDir += "aoc2017/";
