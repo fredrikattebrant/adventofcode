@@ -1,6 +1,7 @@
 package se.attebrant.aoc2023;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,7 +19,7 @@ public class Advent13 extends AbstractAdvent {
     var debug = true;
     Advent13 advent = new Advent13(debug);
     String day = getDayPart(advent);
-    print("Result day " + day + ", part1: " + advent.solve(day, IS_PART1, IS_TEST));
+    print("Result day " + day + ", part1: " + advent.solve(day, IS_PART1, IS_LIVE));
     // print("Result day " + day + ", part2: " + advent.solve(day, IS_PART2, IS_TEST));
   }
 
@@ -28,42 +29,55 @@ public class Advent13 extends AbstractAdvent {
   }
 
   private int solvePart1(List<String> input) {
-    Set<String> rowPatterns = new HashSet<>();
-    int rowCount = 0;
-    int rowFirstStop = 0;
-    for (String line : input) {
-      rowPatterns.add(line);
-      rowCount++;
-      if (rowCount > rowPatterns.size() && rowFirstStop == 0) {
-        rowFirstStop = rowPatterns.size();
-      }
-      logf("%s %d %d", line, rowCount, rowPatterns.size());
-    }
-    if (rowPatterns.size() > rowFirstStop) {
-      System.out.println("NOT mirrored");
-    }
-    System.out.println();
+    int total = 0;
 
-    Set<String> colPatterns = new HashSet<>();
-    int colCount = 0;
-    for (int c = 0; c < input.get(0).length(); c++) {
+    List<String> pattern = new ArrayList<>();
+    for (int i = 0; i < input.size(); i++) {
+      // Read lines until empty line, then process the pattern and repeat for next pattern
+      String line = input.get(i);
+      if (!line.isBlank()) {
+        pattern.add(line);
+      } else {
+        total += getMirroringRowScore(pattern);
+        total += getMirroringColumnScore(pattern);
+        pattern = new ArrayList<>();
+        log("Total: " + total);
+        log("");
+      }
+    }
+    if (!pattern.isEmpty()) {
+      total += getMirroringRowScore(pattern);
+      total += getMirroringColumnScore(pattern);
+    }
+    return total;
+  }
+
+  private int getMirroringRowScore(List<String> pattern) {
+    int mirroredRow = findMirroringLine(pattern);
+    if (mirroredRow > 0) {
+      System.out.println("Mirrored at row: " + mirroredRow);
+      return 100 * mirroredRow;
+    }
+    return 0;
+  }
+
+  private int getMirroringColumnScore(List<String> pattern) {
+    List<String> columnLines = new ArrayList<>();
+    for (int c = 0; c < pattern.get(0).length(); c++) {
       final int cIx = c;
-      String column = input.stream()
+      String column = pattern.stream()
           .map(s -> s.charAt(cIx))
           .map(Object::toString)
           .collect(Collectors.joining());
-      colPatterns.add(column);
-      colCount++;
-      logf("%s %d %d", column, colCount, colPatterns.size());
+      columnLines.add(column);
     }
-    System.out.println();
-    System.out.println("Rows - count, size: " + rowCount + ", " + rowPatterns.size());
-    System.out.println("Colums - count, size:" + colCount + ", " + colPatterns.size());
 
-
-
-    int total = rowCount + 100 * colCount;
-    return total;
+    int mirroredColumn = findMirroringLine(columnLines);
+    if (mirroredColumn > 0) {
+      System.out.println("Mirrored at column: " + mirroredColumn);
+      return mirroredColumn;
+    }
+    return 0;
   }
 
   private int findMirroringLine(List<String> lines) {
@@ -80,6 +94,7 @@ public class Advent13 extends AbstractAdvent {
     }
     if (patterns.size() > firstStop) {
       System.out.println("NOT mirrored");
+      return 0;
     }
     System.out.println();
     return firstStop;
