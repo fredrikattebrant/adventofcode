@@ -17,7 +17,7 @@ public abstract class AbstractAdvent {
    * Define the baseDir for input files, must end with a slash '/'!
    */
   protected String baseDir =
-      "/Users/fredrik/git/adventofcode/src/se/attebrant/";
+      "/Users/fredrik/git/AoC/adventofcode/src/se/attebrant/";
 
   protected boolean debug = false;
   protected static boolean IS_TEST = true;
