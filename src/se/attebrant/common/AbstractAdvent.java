@@ -93,16 +93,23 @@ public abstract class AbstractAdvent {
    * @throws IOException thrown when reading the input fails.
    */
   protected List<String> readData(String day, boolean isPart2, boolean isTest) throws IOException {
-    String testSuffix = isTest ? "test" : "";
-    String testPart = isPart2 ? "2" : "1";
-    String part = isTest ? testPart : "";
-    String inputFilename = "Advent" + day + testSuffix + part + ".txt";
+    String inputFilename = makeInputFilename(day, isPart2, isTest);
 
     Path path = Paths.get(baseDir + inputFilename);
     return Files.readAllLines(path);
   }
 
+  private String makeInputFilename(String day, boolean isPart2, boolean isTest) {
+    String testSuffix = isTest ? "test" : "";
+    String testPart = isPart2 ? "2" : "1";
+    String part = isTest ? testPart : "";
+    return "Advent" + day + testSuffix + part + ".txt";
+  }
 
+  public List<List<String>> readMatrix(String day, boolean isPart2, boolean isTest) {
+    String inputFilename = makeInputFilename(day, isPart2, isTest);
+    return readData2(baseDir + inputFilename);
+  }
 
   public List<List<String>> readData2(String filename) {
     List<List<String>> dataMatrix = new ArrayList<>();
