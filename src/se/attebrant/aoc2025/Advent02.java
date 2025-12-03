@@ -14,12 +14,12 @@ public class Advent02 extends AbstractAdvent {
   }
 
   public static void main(String[] args) throws IOException {
-    var isTest = true;
+    var isTest = false;
     Advent02 advent = new Advent02(isTest);
-    advent.debug = true;
+    advent.debug = false;
     String day = getDayPart(advent);
-    print("Result day " + day + ", part1: " + advent.solve(day, false, false));
-    print("Result day " + day + ", part2: " + advent.solve(day, true, true));
+    print("Result day " + day + ", part1: " + advent.solve(day, false, isTest));
+    print("Result day " + day + ", part2: " + advent.solve(day, true, isTest));
   }
 
   private long solve(String day, boolean isPart2, boolean isTest) throws IOException {
